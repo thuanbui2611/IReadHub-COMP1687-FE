@@ -4,7 +4,7 @@ export default function Header() {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src="./image/logo-IReadHub-1.png"
             className="h-8 mr-3"
             alt="IReadHub Logo"
           />
