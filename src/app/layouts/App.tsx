@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/book-detail" component={BookDetails} />
+      <Route exact path="/book-detail/:id" component={BookDetails} />
       <Route exact path="/books" component={Books} />
     </>
   );

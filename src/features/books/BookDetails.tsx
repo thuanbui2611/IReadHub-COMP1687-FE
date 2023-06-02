@@ -1,4 +1,24 @@
+import { useState, useEffect } from "react";
+import { Book } from "../../app/models/book";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import BookSuggest from "./BookSuggest";
+
 export default function BookDetails() {
+  const { id } = useParams<{ id: string }>();
+  const [book, setBook] = useState<Book | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => setBook(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <h3>Loading...</h3>;
+  if (!book) return <h3>Book not found</h3>;
   return (
     <>
       {/* <!-- Features --> */}
@@ -15,10 +35,10 @@ export default function BookDetails() {
               >
                 <div className="w-full lg:py-6 mt-6 lg:mt-0">
                   <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                    BRAND NAME
+                    {book.category}
                   </h2>
                   <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                    The Catcher in the Rye
+                    {book.title}
                   </h1>
                   <div className="flex mb-4">
                     <span className="flex items-center">
@@ -118,19 +138,7 @@ export default function BookDetails() {
                       </a>
                     </span>
                   </div>
-                  <p className="leading-relaxed">
-                    Fam locavore kickstarter distillery. Mixtape chillwave
-                    tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam
-                    indxgo juiceramps cornhole raw denim forage brooklyn.
-                    Everyday carry +1 seitan poutine tumeric. Gastropub blue
-                    bottle austin listicle pour-over, neutra jean shorts keytar
-                    banjo tattooed umami cardigan. Fam locavore kickstarter
-                    distillery. Mixtape chillwave tumeric sriracha taximy chia
-                    microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole
-                    raw denim forage brooklyn. Everyday carry +1 seitan poutine
-                    tumeric. Gastropub blue bottle austin listicle pour-over,
-                    neutra jean shorts keytar banjo tattooed umami cardigan
-                  </p>
+                  <p className="leading-relaxed">{book.description}</p>
                   <div className="flex mt-6 items-center pb-2 border-b-2 border-gray-100 mb-5">
                     <div className="flex">
                       <span className="mr-3">Color</span>
@@ -166,7 +174,7 @@ export default function BookDetails() {
                   <hr></hr>
                   <div className="flex pt-5">
                     <span className="title-font font-medium text-2xl text-gray-900">
-                      $58.00
+                      ${book.price}
                     </span>
                     <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                       Button
@@ -194,40 +202,10 @@ export default function BookDetails() {
               <div className="relative">
                 {/* <!-- Tab Content --> */}
                 <div>
-                  <div
-                    id="tabs-with-card-1"
-                    role="tabpanel"
-                    aria-labelledby="tabs-with-card-item-1"
-                  >
+                  <div aria-labelledby="Image of book">
                     <img
                       className="shadow-xl shadow-gray-200 rounded-xl dark:shadow-gray-900/[.2]"
-                      src="https://images.unsplash.com/photo-1605629921711-2f6b00c6bbf4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&h=1220&q=80"
-                      alt="Image Description"
-                    />
-                  </div>
-
-                  <div
-                    id="tabs-with-card-2"
-                    className="hidden"
-                    role="tabpanel"
-                    aria-labelledby="tabs-with-card-item-2"
-                  >
-                    <img
-                      className="shadow-xl shadow-gray-200 rounded-xl dark:shadow-gray-900/[.2]"
-                      src="https://images.unsplash.com/photo-1665686306574-1ace09918530?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&h=1220&q=80"
-                      alt="Image Description"
-                    />
-                  </div>
-
-                  <div
-                    id="tabs-with-card-3"
-                    className="hidden"
-                    role="tabpanel"
-                    aria-labelledby="tabs-with-card-item-3"
-                  >
-                    <img
-                      className="shadow-xl shadow-gray-200 rounded-xl dark:shadow-gray-900/[.2]"
-                      src="https://images.unsplash.com/photo-1598929213452-52d72f63e307?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&h=1220&q=80"
+                      src={book.image}
                       alt="Image Description"
                     />
                   </div>
@@ -277,148 +255,7 @@ export default function BookDetails() {
           </div>
           {/* End Background Color */}
         </div>
-        {/* <!-- Card Blog --> */}
-        <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-          {/* <!-- Title --> */}
-          <div className="max-w-2xl text-center mx-auto mb-10 lg:mb-14">
-            <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-              Read our latest news
-            </h2>
-            <p className="mt-1 text-gray-600 dark:text-gray-400">
-              We've helped some great companies brand, design and get to market.
-            </p>
-          </div>
-          {/* <!-- End Title --> */}
-
-          {/* <!-- Grid --> */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 lg:mb-14">
-            {/* <!-- Card --> */}
-            <a
-              className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-              href="#"
-            >
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  className="object-cover h-80 w-full rounded-t-xl"
-                  src="https://images.unsplash.com/photo-1668869713519-9bcbb0da7171?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                  alt="Image Description"
-                />
-              </div>
-              <div className="p-4 md:p-5">
-                <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                  Product
-                </p>
-                <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                  Better is when everything works together
-                </h3>
-              </div>
-            </a>
-            {/* <!-- End Card --> */}
-
-            {/* <!-- Card --> */}
-            <a
-              className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-              href="#"
-            >
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  className="object-cover h-80 w-full rounded-t-xl"
-                  src="https://images.unsplash.com/photo-1668584054035-f5ba7d426401?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3465&q=80"
-                  alt="Image Description"
-                />
-              </div>
-              <div className="p-4 md:p-5">
-                <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                  Business
-                </p>
-                <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                  What CFR really is about
-                </h3>
-              </div>
-            </a>
-            {/* <!-- End Card --> */}
-
-            {/* <!-- Card --> */}
-            <a
-              className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-              href="#"
-            >
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  className="object-cover h-80 w-full rounded-t-xl"
-                  src="https://images.unsplash.com/photo-1668584054131-d5721c515211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
-                  alt="Image Description"
-                />
-              </div>
-              <div className="p-4 md:p-5">
-                <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                  Business
-                </p>
-                <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                  Should Product Owners think like entrepreneurs?
-                </h3>
-              </div>
-            </a>
-            {/* <!-- End Card --> */}
-
-            {/* <!-- Card --> */}
-            <a
-              className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-              href="#"
-            >
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  className="object-cover h-80 w-full rounded-t-xl"
-                  src="https://images.unsplash.com/photo-1668584054131-d5721c515211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
-                  alt="Image Description"
-                />
-              </div>
-              <div className="p-4 md:p-5">
-                <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                  Facilitate
-                </p>
-                <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                  Announcing Front Strategies: Ready-to-use rules
-                </h3>
-              </div>
-            </a>
-            {/* <!-- End Card --> */}
-          </div>
-          {/* <!-- End Grid --> */}
-
-          {/* <!-- Card --> */}
-          <div className="text-center">
-            <div className="inline-block bg-white border shadow-sm rounded-full dark:bg-slate-900 dark:border-gray-800">
-              <div className="py-3 px-4 flex items-center gap-x-2">
-                <p className="text-gray-600 dark:text-gray-400">
-                  Want to read more?
-                </p>
-                <a
-                  className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline font-medium"
-                  href="../docs/index.html"
-                >
-                  Go here
-                  <svg
-                    className="w-2.5 h-2.5"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                  >
-                    <path
-                      d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          {/* <!-- End Card --> */}
-        </div>
-        {/* <!-- End Card Blog --> */}
+        <BookSuggest />
       </div>
       {/* End Features */}
     </>

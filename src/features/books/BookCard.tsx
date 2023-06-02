@@ -9,11 +9,11 @@ export default function BookCard({ book }: Props) {
     <>
       <div className="my-1 px-1 w-auto md:w-1/2 lg:my-4 lg:px-4 lg:w-1/4 ">
         {/* <!-- Article --> */}
-        <article className="overflow-hidden rounded-lg shadow-lg">
+        <article className="overflow-hidden rounded-lg shadow-lg ">
           <a href="#">
             <img
               alt="Placeholder"
-              className="block h-auto w-full"
+              className="block object-cover h-80 w-full rounded-t-xl"
               src={book.image}
             />
           </a>
