@@ -1,4 +1,21 @@
+import { Carousel } from "flowbite";
+import type {
+  CarouselItem,
+  CarouselOptions,
+  CarouselInterface,
+} from "flowbite";
+import { useState, useEffect } from "react";
+import { Book } from "../../app/models/book";
+
 export default function BookSuggest() {
+  const [booksSuggested, setBooksSuggested] = useState<Book[]>([]);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setBooksSuggested(data));
+  }, []);
+
   return (
     <>
       {/* <!-- Card Blog --> */}
