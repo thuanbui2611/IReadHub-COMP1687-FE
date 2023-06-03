@@ -1,11 +1,8 @@
-import { Carousel } from "flowbite";
-import type {
-  CarouselItem,
-  CarouselOptions,
-  CarouselInterface,
-} from "flowbite";
 import { useState, useEffect } from "react";
 import { Book } from "../../app/models/book";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Pagination, Autoplay, Navigation } from "swiper";
+import "swiper/css";
 
 export default function BookSuggest() {
   const [booksSuggested, setBooksSuggested] = useState<Book[]>([]);
@@ -15,7 +12,6 @@ export default function BookSuggest() {
       .then((res) => res.json())
       .then((data) => setBooksSuggested(data));
   }, []);
-
   return (
     <>
       {/* <!-- Card Blog --> */}
@@ -32,99 +28,50 @@ export default function BookSuggest() {
         {/* <!-- End Title --> */}
 
         {/* <!-- Grid --> */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 lg:mb-14">
-          {/* <!-- Card --> */}
-          <a
-            className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-            href="#"
+        <div className=" mb-10 lg:mb-14">
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            navigation={true}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            freeMode={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[FreeMode, Pagination, Autoplay, Navigation]}
           >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
-                className="object-cover h-80 w-full rounded-t-xl"
-                src="https://images.unsplash.com/photo-1668869713519-9bcbb0da7171?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=988&q=80"
-                alt="Image Description"
-              />
-            </div>
-            <div className="p-4 md:p-5">
-              <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                Product
-              </p>
-              <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                Better is when everything works together
-              </h3>
-            </div>
-          </a>
-          {/* <!-- End Card --> */}
-
-          {/* <!-- Card --> */}
-          <a
-            className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-            href="#"
-          >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
-                className="object-cover h-80 w-full rounded-t-xl"
-                src="https://images.unsplash.com/photo-1668584054035-f5ba7d426401?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3465&q=80"
-                alt="Image Description"
-              />
-            </div>
-            <div className="p-4 md:p-5">
-              <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                Business
-              </p>
-              <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                What CFR really is about
-              </h3>
-            </div>
-          </a>
-          {/* <!-- End Card --> */}
-
-          {/* <!-- Card --> */}
-          <a
-            className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-            href="#"
-          >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
-                className="object-cover h-80 w-full rounded-t-xl"
-                src="https://images.unsplash.com/photo-1668584054131-d5721c515211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
-                alt="Image Description"
-              />
-            </div>
-            <div className="p-4 md:p-5">
-              <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                Business
-              </p>
-              <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                Should Product Owners think like entrepreneurs?
-              </h3>
-            </div>
-          </a>
-          {/* <!-- End Card --> */}
-
-          {/* <!-- Card --> */}
-          <a
-            className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-            href="#"
-          >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
-                className="object-cover h-80 w-full rounded-t-xl"
-                src="https://images.unsplash.com/photo-1668584054131-d5721c515211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
-                alt="Image Description"
-              />
-            </div>
-            <div className="p-4 md:p-5">
-              <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
-                Facilitate
-              </p>
-              <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
-                Announcing Front Strategies: Ready-to-use rules
-              </h3>
-            </div>
-          </a>
-          {/* <!-- End Card --> */}
+            {booksSuggested.map((book, id) => (
+              <SwiperSlide>
+                {/* <!-- Card --> */}
+                <a
+                  className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
+                  href="#"
+                >
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img
+                      className="object-scale-down h-80 w-full rounded-t-xl"
+                      src={book.image}
+                      alt="Image Book"
+                    />
+                  </div>
+                  <div className="p-4 md:p-5 min-h-[128px]">
+                    <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
+                      {book.category}
+                    </p>
+                    <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
+                      {book.title}
+                    </h3>
+                  </div>
+                </a>
+                {/* <!-- End Card --> */}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
+
         {/* <!-- End Grid --> */}
 
         {/* <!-- Card --> */}

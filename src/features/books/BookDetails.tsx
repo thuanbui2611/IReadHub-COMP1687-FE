@@ -26,7 +26,7 @@ export default function BookDetails() {
         <div className="relative p-6 md:p-16">
           {/* <!-- Grid --> */}
           <div className="relative z-10 lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center">
-            <div className="mb-10 lg:mb-0 lg:col-span-6 lg:col-start-8 lg:order-2">
+            <div className="mb-10 lg:mb-0 lg:col-span-6 lg:col-start-7 lg:order-2 lg:mr-10">
               {/* <!-- Tab Navs --> */}
               <nav
                 className="grid gap-4 mt-5 md:mt-10"
@@ -198,13 +198,13 @@ export default function BookDetails() {
             </div>
             {/* <!-- End Col --> */}
 
-            <div className="lg:col-span-6">
+            <div className="lg:col-span-6 lg:col-start-1 ">
               <div className="relative">
                 {/* <!-- Tab Content --> */}
                 <div>
-                  <div aria-labelledby="Image of book">
+                  <div className=" lg:pl-48" aria-labelledby="Image of book">
                     <img
-                      className="shadow-xl shadow-gray-200 rounded-xl dark:shadow-gray-900/[.2]"
+                      className="object-scale-down shadow-xl  shadow-gray-200 rounded-xl dark:shadow-gray-900/[.2]"
                       src={book.image}
                       alt="Image Description"
                     />
