@@ -4,6 +4,7 @@ import "./../../styles.css";
 import Header from "./Header";
 import BookDetails from "../../features/books/BookDetails";
 import Books from "../../features/books/Books";
+
 import "flowbite";
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
     <>
       <Header />
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/book-detail/:id" component={BookDetails} />
       <Route exact path="/books" component={Books} />
+      <Route exact path="/book-detail/:id" component={BookDetails} />
     </>
   );
 }

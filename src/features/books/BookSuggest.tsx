@@ -12,6 +12,7 @@ export default function BookSuggest() {
       .then((res) => res.json())
       .then((data) => setBooksSuggested(data));
   }, []);
+
   return (
     <>
       {/* <!-- Card Blog --> */}
@@ -48,7 +49,7 @@ export default function BookSuggest() {
                 {/* <!-- Card --> */}
                 <a
                   className="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800"
-                  href="#"
+                  href={"/book-detail/" + book.id}
                 >
                   <div className="aspect-w-16 aspect-h-9">
                     <img
@@ -57,11 +58,14 @@ export default function BookSuggest() {
                       alt="Image Book"
                     />
                   </div>
-                  <div className="p-4 md:p-5 min-h-[128px]">
+                  <div
+                    className="p-4 md:p-5 min-h-[128px]"
+                    style={{ lineClamp: 2 }}
+                  >
                     <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
                       {book.category}
                     </p>
-                    <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white">
+                    <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white line-clamp-2">
                       {book.title}
                     </h3>
                   </div>
