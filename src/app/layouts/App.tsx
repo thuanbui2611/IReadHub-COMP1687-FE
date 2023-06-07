@@ -12,8 +12,8 @@ function App() {
     <>
       <Header />
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/books" component={Books} />
-      <Route exact path="/book-detail/:id" component={BookDetails} />
+      <Route path="/books" component={Books} />
+      <Route path="/book-detail/:id" component={BookDetails} />
     </>
   );
 }

@@ -438,12 +438,12 @@ export default function HomePage() {
           <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
             {mostViewedBook.slice(0, 6).map((mostViewedBook) => (
               <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-                <div className="book">
+                <div className="book bg-cover bg-center w-full h-full">
                   <p>Hello</p>
                   <div className="cover">
-                    <a href="#">
+                    <a href={"/book-detail/" + mostViewedBook.id}>
                       <img
-                        className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                        className="w-full object-cover rounded-lg sm:rounded-none sm:rounded-l-lg"
                         src={mostViewedBook.image}
                         alt="Book Avatar"
                       />
@@ -541,7 +541,7 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <a
-              href="#"
+              href="/books"
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
             >
               See more
