@@ -451,14 +451,14 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className=" pl-20">
+                <div className=" pl-10 ">
                   <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">
                     <a href="#">{mostViewedBook.title}</a>
                   </h3>
                   <span className="text-gray-500 dark:text-gray-400">
                     {mostViewedBook.category}
                   </span>
-                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400 ">
+                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400 text-justify pr-10 line-clamp-5">
                     {mostViewedBook.description}
                   </p>
                   <ul className="flex space-x-4 sm:mt-0">

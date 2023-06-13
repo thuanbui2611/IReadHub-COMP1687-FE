@@ -65,7 +65,7 @@ export default function BookSuggest() {
                     <p className="mt-2 text-xs uppercase text-gray-600 dark:text-gray-400">
                       {book.category}
                     </p>
-                    <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white line-clamp-2">
+                    <h3 className="mt-2 text-lg font-medium text-gray-800 group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-white line-clamp-2 text-justify">
                       {book.title}
                     </h3>
                   </div>
