@@ -1,16 +1,10 @@
 import { useState } from "react";
 import LoginForm from "../../features/loginForm/LoginForm";
 
-export default function Header() {
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handlePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  const handleClose = () => {
-    setShowPopup(false);
-  };
+interface Props {
+  onLoginFormOpen: () => void;
+}
+export default function Header(props: Props) {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 drop-shadow-xl">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -75,8 +69,7 @@ export default function Header() {
         </form>
         <div className="flex items-center md:order-2">
           {/* Test Login Form  */}
-          <button onClick={handlePopup}>Login</button>
-          {showPopup && <LoginForm onClose={handleClose} />}
+          <button onClick={props.onLoginFormOpen}>Login</button>
           {/* End Login Form */}
           <li className="font-sans block lg:inline-block mr-4 pt-1 lg:mt-0 lg:ml-6 text-black hover:text-gray-700">
             <a href="/my-cart" role="button" className="relative flex">

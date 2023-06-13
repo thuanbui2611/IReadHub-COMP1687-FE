@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 interface Props {
   onClose: () => void;
 }
-export default function LoginForm(props: { onClose: () => void }) {
+export default function LoginForm(props: Props) {
   const [success, setSuccess] = useState(false);
   const [notify, setNotify] = useState(false);
 
@@ -21,13 +21,25 @@ export default function LoginForm(props: { onClose: () => void }) {
       setNotify(true);
     }
   };
+
+  const handleCloseLoginForm = (e: any) => {
+    if (e.target.id === "wrapper") {
+      props.onClose();
+    }
+  };
+
   return (
     <>
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 fixed top-0 right-0 bottom-0 left-0 items-center">
+      <div
+        id="wrapper"
+        onClick={handleCloseLoginForm}
+        className="min-h-screen bg-opacity-60 fixed overflow-hidden bg-gray-100 py-6 flex flex-col justify-center sm:py-12 top-0 right-0 bottom-0 left-0 items-center z-50"
+      >
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
           <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
             <button
+              id="closeButton"
               className="close-btn absolute top-10 right-10"
               onClick={props.onClose}
             >

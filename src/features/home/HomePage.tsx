@@ -437,13 +437,13 @@ export default function HomePage() {
           </div>
           <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
             {mostViewedBook.slice(0, 6).map((mostViewedBook) => (
-              <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
-                <div className="book bg-cover bg-center w-full h-full">
-                  <p>Hello</p>
+              <div className="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 max-w-lg">
+                <div className="book bg-cover bg-center w-48 h-48 max-h-48">
+                  <p className="pl-8 line-clamp-5">{mostViewedBook.title}</p>
                   <div className="cover">
                     <a href={"/book-detail/" + mostViewedBook.id}>
                       <img
-                        className="w-full object-cover rounded-lg sm:rounded-none sm:rounded-l-lg"
+                        className="w-full max-h-48 object-cover rounded-lg sm:rounded-none sm:rounded-l-lg"
                         src={mostViewedBook.image}
                         alt="Book Avatar"
                       />
@@ -451,14 +451,14 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="p-5">
-                  <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <div className=" pl-20">
+                  <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2">
                     <a href="#">{mostViewedBook.title}</a>
                   </h3>
                   <span className="text-gray-500 dark:text-gray-400">
                     {mostViewedBook.category}
                   </span>
-                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
+                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400 ">
                     {mostViewedBook.description}
                   </p>
                   <ul className="flex space-x-4 sm:mt-0">
